@@ -107,7 +107,5 @@ public class PersonServiceTest {
 				.isInstanceOf(PersonException.class)
 				.hasFieldOrPropertyWithValue("errors", expectedErrors)
 				.hasMessage(expectedMessage);
-
-
 	}
 }
