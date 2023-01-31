@@ -2,6 +2,7 @@ package com.unittest.codecoverage.service;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
@@ -97,4 +98,16 @@ public class PersonServiceTest {
 			.hasMessage(expectedMessage);
 	}
 
+
+	@Test
+	public void testDelete_shouldThrowExceptionWhenPersonNameIsEmpty() {
+		List<String> expectedErrors = Lists.newArrayList("Name is required");
+		String expectedMessage = String.join(";", expectedErrors);
+		assertThatThrownBy(() -> service.delete("  "))
+				.isInstanceOf(PersonException.class)
+				.hasFieldOrPropertyWithValue("errors", expectedErrors)
+				.hasMessage(expectedMessage);
+
+
+	}
 }
